@@ -23,7 +23,7 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch(e => console.log(e));
 
-app.get("/", (req, res) => res.send("Hello World!"));
+app.get("/", (req, res) => res.send("Hello World!!"));
 
 app.post("/register", (req, res) => {
   // 회원가입 할때 필요한 정보들을 client에서 가져오면
