@@ -3,6 +3,7 @@ const app = express();
 const port = 3000;
 const bodyParser = require("body-parser");
 const { User } = require("./models/User");
+const config = require("./config/key");
 
 // application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -11,19 +12,16 @@ app.use(bodyParser.json());
 
 const mongoose = require("mongoose");
 mongoose
-  .connect(
-    "mongodb+srv://hellomac87:1234@youtube-clone-bebzw.mongodb.net/test?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false
-    }
-  )
+  .connect(config.mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  })
   .then(() => console.log("MongoDB Connected"))
   .catch(e => console.log(e));
 
-app.get("/", (req, res) => res.send("Hello World!!"));
+app.get("/", (req, res) => res.send("Hello World!"));
 
 app.post("/register", (req, res) => {
   // 회원가입 할때 필요한 정보들을 client에서 가져오면
